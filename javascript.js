@@ -2,6 +2,9 @@ console.log("Hello World");
 
 const max = 3; //all 3 rps options
 
+let humanScore = 0;
+let computerScore = 0;
+
 console.log(getComputerChoice());
 getHumanChoice();
 
