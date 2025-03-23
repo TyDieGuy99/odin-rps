@@ -5,37 +5,93 @@ const max = 3; //all 3 rps options
 let humanScore = 0;
 let computerScore = 0;
 
-console.log(getComputerChoice());
-getHumanChoice();
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice()
 
-//this converts random number 0-2 into rps option
+
+playRound(humanSelection, computerSelection);
+
+
+//functions go down here
+
+//this converts random number 0-2 into rps option for cpu
 function getComputerChoice() {
 
     let x = Math.floor(Math.random() * max);
     let computerChoice = 'none';
 
     if (x == 0) { 
-        computerChoice = 'Rock';
+        computerChoice = 'rock';
+        console.log('com rock')
+        return computerChoice;
     } else if (x == 1) {
-        computerChoice = 'Paper';
+        computerChoice = 'paper';
+        console.log('com paper')
+        return computerChoice;
     } else { 
-        computerChoice= 'Scissors';
+        computerChoice = 'scissors';
+        console.log('com scissors')
+        return computerChoice;
     }
-    return computerChoice;
+    
 }
 
+//use prompt to get player input
 function getHumanChoice() {
     let playerChoice = prompt('Rock, Paper, Scissors', 'Choose an option..'); //ask for player input
     //use .toLowerCase() to account for if player capitalizes any letter in their input
     if (playerChoice.toLowerCase() === 'rock') {
-        return console.log('I Choose Rock')
+        console.log('player rock')
+        return playerChoice
     } else if (playerChoice.toLowerCase() === 'paper') {
-        return console.log('I Choose Paper')
+        console.log('player paper')
+        return playerChoice
     } else if (playerChoice.toLowerCase() === 'scissors') {
-        return console.log('I Choose Scissors')
+        console.log('player scissors')
+        return playerChoice
     } else {
-        return null; //if player doesn't type any of the 3 options
+        return null //if player doesn't type any of the 3 options
     }
+     
+}
+
+//play rps round
+function playRound(humanChoice, computerChoice) {
+    console.log(humanChoice);
+    console.log(computerChoice);
+    //if player picks rock
+     
+    if (humanChoice == 'rock' && computerChoice == 'scissors') { //win condition
+        humanScore++;
+        console.log("Rock beats Scissors! You Win!!!");
+
+    } else if (humanChoice == 'rock' && computerChoice == 'paper') { //lose condition
+        computerScore++;
+        console.log("Paper beats Rock! You Lose!!!");
+
+        //if player picks paper
         
+    } else if (humanChoice == 'paper' && computerChoice == 'scissors') { //lose condition
+        computerScore++;
+        console.log("Scissors beats Paper! You Lose!!!");
+    } else if (humanChoice == 'paper' && computerChoice == 'rock') { //win condition
+        humanScore++;
+        console.log("Paper beats Rock! You Win!!!");
+
+        //if player picks scissors
+
+    } else if (humanChoice == 'scissors' && computerChoice == 'rock') { //lose condition
+        computerScore++;
+        console.log("Rock beats Scissors! you Lose!!!");
+    } else if (humanChoice == 'scissors' && computerChoice == 'paper') { //win condition
+        humanScore++;
+        console.log("Scissors beats Paper! You Win!!!");
+
+    } else { //player and cpu pick same
+        console.log("Draw!");
+    }
+
+    console.log(humanScore);
+    console.log(computerScore);
 }
 
