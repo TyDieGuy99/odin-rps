@@ -15,7 +15,7 @@ function getComputerChoice() {
     } else { 
         computerChoice= 'Scissors';
     }
-    return console.log(computerChoice);
+    return computerChoice;
 }
 
 
