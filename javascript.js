@@ -1,16 +1,12 @@
-console.log("Hello World");
+console.log("Rock Paper Scissors!");
 
 const max = 3; //all 3 rps options
 
 let humanScore = 0;
 let computerScore = 0;
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice()
-
-
-playRound(humanSelection, computerSelection);
-
+//run it
+playGame();
 
 //functions go down here
 
@@ -95,3 +91,20 @@ function playRound(humanChoice, computerChoice) {
     console.log(computerScore);
 }
 
+//play full game of rps
+function playGame() {
+    for (let i = 0; i < 5; i++) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+        
+        playRound(humanSelection, computerSelection);
+    }
+
+    if (humanScore > computerScore) {
+        console.log("You Win!! Score: " + humanScore + ":" + computerScore)
+    } else if (humanScore < computerScore) {
+        console.log("You Lose!! Score: " + humanScore + ":" + computerScore)
+    } else {
+        console.log("The match is a draw!")
+    }
+}
