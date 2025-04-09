@@ -14,6 +14,23 @@ buttons.forEach((button) => {
     });
 });
 
+const info = document.querySelector('#info');
+
+const pChoice = document.createElement('p');
+pChoice.classList.add('pChoice');
+pChoice.textContent = 'Player: NONE';
+info.appendChild(pChoice);
+
+const cChoice = document.createElement('p');
+cChoice.classList.add('cChoice');
+cChoice.textContent = 'CPU: NONE';
+info.appendChild(cChoice);
+
+const roundResult = document.createElement('p');
+roundResult.classList.add('roundResult');
+roundResult.textcontent = '';
+info.appendChild(roundResult);
+
 //run it
 //playRound(humanSelection, computerSelection);
 
@@ -27,15 +44,18 @@ function getComputerChoice() {
 
     if (x == 0) { 
         computerChoice = 'rock';
-        console.log('com rock')
+        console.log('com rock');
+        cChoice.textContent = 'CPU: ROCK';
         return computerChoice;
     } else if (x == 1) {
         computerChoice = 'paper';
-        console.log('com paper')
+        console.log('com paper');
+        cChoice.textContent = 'CPU: PAPER';
         return computerChoice;
     } else { 
         computerChoice = 'scissors';
-        console.log('com scissors')
+        console.log('com scissors');
+        cChoice.textContent = 'CPU: SCISSORS';
         return computerChoice;
     }
     
@@ -45,14 +65,17 @@ function getComputerChoice() {
 function getHumanChoice(buttonChoice) {
     let playerChoice = buttonChoice;
     if (playerChoice.toLowerCase() === 'rock') {
-        console.log('player rock')
-        return playerChoice
+        console.log('player rock');
+        pChoice.textContent = 'Player: ROCK';
+        return playerChoice;
     } else if (playerChoice.toLowerCase() === 'paper') {
-        console.log('player paper')
-        return playerChoice
+        console.log('player paper');
+        pChoice.textContent = 'Player: PAPER';
+        return playerChoice;
     } else if (playerChoice.toLowerCase() === 'scissors') {
-        console.log('player scissors')
-        return playerChoice
+        console.log('player scissors');
+        pChoice.textContent = 'Player: SCISSORS';
+        return playerChoice;
     } else {
         return null //if player doesn't type any of the 3 options
     }
@@ -67,31 +90,38 @@ function playRound(humanChoice, computerChoice) {
      
     if (humanChoice == 'rock' && computerChoice == 'scissors') { //win condition
         humanScore++;
+        roundResult.textContent = 'Rock beats Scissors! You Win!!!';
         console.log("Rock beats Scissors! You Win!!!");
 
     } else if (humanChoice == 'rock' && computerChoice == 'paper') { //lose condition
         computerScore++;
+        roundResult.textContent = 'Paper beats Rock! You Lose!!!';
         console.log("Paper beats Rock! You Lose!!!");
 
         //if player picks paper
         
     } else if (humanChoice == 'paper' && computerChoice == 'scissors') { //lose condition
         computerScore++;
+        oundResult.textContent = 'Scissors beats Paper! You Lose!!!';
         console.log("Scissors beats Paper! You Lose!!!");
     } else if (humanChoice == 'paper' && computerChoice == 'rock') { //win condition
         humanScore++;
+        roundResult.textContent = 'Paper beats Rock! You Win!!!';
         console.log("Paper beats Rock! You Win!!!");
 
         //if player picks scissors
 
     } else if (humanChoice == 'scissors' && computerChoice == 'rock') { //lose condition
         computerScore++;
+        roundResult.textContent = 'Rock beats Scissors! you Lose!!!';
         console.log("Rock beats Scissors! you Lose!!!");
     } else if (humanChoice == 'scissors' && computerChoice == 'paper') { //win condition
         humanScore++;
+        roundResult.textContent = 'Scissors beats Paper! You Win!!!';
         console.log("Scissors beats Paper! You Win!!!");
 
     } else { //player and cpu pick same
+        roundResult.textContent = 'Draw!';
         console.log("Draw!");
     }
 
