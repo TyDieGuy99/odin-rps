@@ -1,12 +1,21 @@
 console.log("Rock Paper Scissors!");
-
+const buttons = document.querySelectorAll('button');
 const max = 3; //all 3 rps options
 
 let humanScore = 0;
 let computerScore = 0;
 
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        console.log(button.id);
+        const humanSelection = getHumanChoice(button.id);
+        const computerSelection = getComputerChoice();
+        playRound(humanSelection, computerSelection);
+    });
+});
+
 //run it
-playGame();
+//playRound(humanSelection, computerSelection);
 
 //functions go down here
 
@@ -33,9 +42,8 @@ function getComputerChoice() {
 }
 
 //use prompt to get player input
-function getHumanChoice() {
-    let playerChoice = prompt('Rock, Paper, Scissors', 'Choose an option..'); //ask for player input
-    //use .toLowerCase() to account for if player capitalizes any letter in their input
+function getHumanChoice(buttonChoice) {
+    let playerChoice = buttonChoice;
     if (playerChoice.toLowerCase() === 'rock') {
         console.log('player rock')
         return playerChoice
@@ -108,3 +116,4 @@ function playGame() {
         console.log("The match is a draw!")
     }
 }
+
