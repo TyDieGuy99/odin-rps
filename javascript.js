@@ -1,8 +1,11 @@
 //variables
 const max = 3; //all 3 rps options
-let pName = prompt('What\'s your name?');
-let cName = prompt('What\'s your opponent\'s name?');
+let pNameInput = prompt('What\'s your name?');
+let pName = pNameInput.substring(0, 12);
+let cNameInput = prompt('What\'s your opponent\'s name?');
+let cName = cNameInput.substring(0, 12);
 let rounds = prompt('How many rounds would you like to play?(Must be at least 3, no more than 25, an odd number)');
+var regex = /^[0-9]+$/;
 let humanScore = 0;
 let computerScore = 0;
 
@@ -14,9 +17,10 @@ if ((pName == null) || (pName == '')){
 if ((cName == null) || (cName == '')){
     cName = 'CPU';
 }
-if ((rounds < 3) || (rounds > 25) || (rounds === NaN) || (rounds % 2 != 0)) {
+if ((rounds < 3) || (rounds > 25) || (!rounds.match(regex)) || (rounds % 2 == 0)) {
     rounds = 5;
 }
+
 console.log(Number(rounds));
 
 const buttons = document.querySelectorAll('button');
