@@ -26,10 +26,22 @@ cChoice.classList.add('cChoice');
 cChoice.textContent = 'CPU: NONE';
 info.appendChild(cChoice);
 
+const totalScore = document.createElement('p');
+totalScore.classList.add('totalScore');
+totalScore.textContent = humanScore + '-' + computerScore;
+info.appendChild(totalScore);
+
 const roundResult = document.createElement('p');
 roundResult.classList.add('roundResult');
-roundResult.textcontent = '';
+roundResult.textContent = '';
 info.appendChild(roundResult);
+
+const winner = document.createElement('p');
+winner.classList.add('winner');
+winner.textContent = '';
+info.appendChild(winner);
+
+
 
 //run it
 //playRound(humanSelection, computerSelection);
@@ -90,35 +102,47 @@ function playRound(humanChoice, computerChoice) {
      
     if (humanChoice == 'rock' && computerChoice == 'scissors') { //win condition
         humanScore++;
+        totalScore.textContent = humanScore + '-' + computerScore;
         roundResult.textContent = 'Rock beats Scissors! You Win!!!';
         console.log("Rock beats Scissors! You Win!!!");
+        checkWinner();
 
     } else if (humanChoice == 'rock' && computerChoice == 'paper') { //lose condition
         computerScore++;
+        totalScore.textContent = humanScore + '-' + computerScore;
         roundResult.textContent = 'Paper beats Rock! You Lose!!!';
         console.log("Paper beats Rock! You Lose!!!");
-
+        checkWinner();
         //if player picks paper
         
     } else if (humanChoice == 'paper' && computerChoice == 'scissors') { //lose condition
         computerScore++;
-        oundResult.textContent = 'Scissors beats Paper! You Lose!!!';
+        totalScore.textContent = humanScore + '-' + computerScore;
+        roundResult.textContent = 'Scissors beats Paper! You Lose!!!';
         console.log("Scissors beats Paper! You Lose!!!");
+        checkWinner();
+        
     } else if (humanChoice == 'paper' && computerChoice == 'rock') { //win condition
         humanScore++;
+        totalScore.textContent = humanScore + '-' + computerScore;
         roundResult.textContent = 'Paper beats Rock! You Win!!!';
         console.log("Paper beats Rock! You Win!!!");
-
+        checkWinner();
         //if player picks scissors
 
     } else if (humanChoice == 'scissors' && computerChoice == 'rock') { //lose condition
         computerScore++;
+        totalScore.textContent = humanScore + '-' + computerScore;
         roundResult.textContent = 'Rock beats Scissors! you Lose!!!';
         console.log("Rock beats Scissors! you Lose!!!");
+        checkWinner();
+
     } else if (humanChoice == 'scissors' && computerChoice == 'paper') { //win condition
         humanScore++;
+        totalScore.textContent = humanScore + '-' + computerScore;
         roundResult.textContent = 'Scissors beats Paper! You Win!!!';
         console.log("Scissors beats Paper! You Win!!!");
+        checkWinner();
 
     } else { //player and cpu pick same
         roundResult.textContent = 'Draw!';
@@ -130,20 +154,17 @@ function playRound(humanChoice, computerChoice) {
 }
 
 //play full game of rps
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        
-        playRound(humanSelection, computerSelection);
-    }
-
-    if (humanScore > computerScore) {
-        console.log("You Win!! Score: " + humanScore + ":" + computerScore)
-    } else if (humanScore < computerScore) {
-        console.log("You Lose!! Score: " + humanScore + ":" + computerScore)
-    } else {
-        console.log("The match is a draw!")
+function checkWinner() {
+    if ((humanScore == 5) || (computerScore == 5)) {
+        if (humanScore > computerScore) {
+            console.log("You Win!! Score: " + humanScore + ":" + computerScore)
+            winner.textContent = 'You won the game!';
+        } else if (humanScore < computerScore) {
+            console.log("You Lose!! Score: " + humanScore + ":" + computerScore)
+            winner.textContent = 'You lost the game!';
+        } else {
+            console.log("The match is a draw!")
+        }
     }
 }
 
