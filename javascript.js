@@ -1,8 +1,18 @@
 //variables
 const max = 3; //all 3 rps options
-
+let pName = prompt('What\'s your name?');
+let cName = prompt('What\'s your opponent\'s name?');
 let humanScore = 0;
 let computerScore = 0;
+
+//if player doesn't input names or cancel use default
+if ((pName == null) || (pName == '')){
+    pName = 'Player';
+}
+
+if ((cName == null) || (cName == '')){
+    cName = 'CPU';
+}
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
@@ -21,13 +31,13 @@ const score = document.querySelector('#score');
 //content elements to be changed when needed
 const pChoice = document.createElement('p');
 pChoice.classList.add('pChoice');
-pChoice.textContent = 'Player: NONE';
+pChoice.textContent = pName + ':';
 pChoice.style.paddingRight = '15px'
 info.appendChild(pChoice);
 
 const cChoice = document.createElement('p');
 cChoice.classList.add('cChoice');
-cChoice.textContent = 'CPU: NONE'
+cChoice.textContent = cName + ':'
 cChoice.style.paddingLeft = '15px'
 info.appendChild(cChoice);
 
@@ -50,6 +60,10 @@ score.appendChild(winner);
 
 //functions go down here
 
+function getPlayerName() {
+    
+}
+
 //this converts random number 0-2 into rps option for cpu
 function getComputerChoice() {
     let x = Math.floor(Math.random() * max);
@@ -57,15 +71,15 @@ function getComputerChoice() {
 
     if (x == 0) { 
         computerChoice = 'rock';
-        cChoice.textContent = 'CPU: ROCK';
+        cChoice.textContent = cName + ': Rock';
         return computerChoice;
     } else if (x == 1) {
         computerChoice = 'paper';
-        cChoice.textContent = 'CPU: PAPER';
+        cChoice.textContent = cName + ': Paper';
         return computerChoice;
     } else { 
         computerChoice = 'scissors';
-        cChoice.textContent = 'CPU: SCISSORS';
+        cChoice.textContent = cName + ': Scissors';
         return computerChoice;
     }
 }
@@ -75,13 +89,13 @@ function getHumanChoice(buttonChoice) {
     let playerChoice = buttonChoice;
 
     if (playerChoice.toLowerCase() === 'rock') {
-        pChoice.textContent = 'Player: ROCK';
+        pChoice.textContent = pName + ': Rock';
         return playerChoice;
     } else if (playerChoice.toLowerCase() === 'paper') {
-        pChoice.textContent = 'Player: PAPER';
+        pChoice.textContent = pName + ': Paper';
         return playerChoice;
     } else if (playerChoice.toLowerCase() === 'scissors') {
-        pChoice.textContent = 'Player: SCISSORS';
+        pChoice.textContent = pName + ': Scissors';
         return playerChoice;
     }
      
@@ -129,7 +143,6 @@ function playRound(humanChoice, computerChoice) {
     } else { //player and cpu pick same
         roundResult.textContent = 'Draw!';
     }
-    
         checkWinner();
 }
 
@@ -155,18 +168,17 @@ function checkWinner() {
         //prompt player if they wish to play again - if yes reset everything to 0, if no disable buttons
         setTimeout(function() { //delay the confirm to allow brower to update results properly
             if (confirm('Play again??')) {
-                console.log('you want to play again');
                 humanScore = 0;
                 computerScore = 0;
                 roundResult.textContent = '';
                 winner.textContent = '';
-                cChoice.textContent = 'CPU: NONE';
-                pChoice.textContent = 'Player: NONE';
+                cChoice.textContent = cName + ':';
+                pChoice.textContent = pName + ':';
                 totalScore.textContent = humanScore + ' : ' + computerScore;
             } else {
-                console.log('you do not want to play again');
                 buttons.forEach((button) => {
                     button.disabled = true;
+                    button.disabled.cursor = 'not-allowed';
                 });
             }
         }, 1);
