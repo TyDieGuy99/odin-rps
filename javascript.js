@@ -2,6 +2,7 @@
 const max = 3; //all 3 rps options
 let pName = prompt('What\'s your name?');
 let cName = prompt('What\'s your opponent\'s name?');
+let rounds = prompt('How many rounds would you like to play?(Must be at least 3, no more than 25, an odd number)');
 let humanScore = 0;
 let computerScore = 0;
 
@@ -13,11 +14,14 @@ if ((pName == null) || (pName == '')){
 if ((cName == null) || (cName == '')){
     cName = 'CPU';
 }
+if ((rounds < 3) || (rounds > 25) || (rounds === NaN) || (rounds % 2 != 0)) {
+    rounds = 5;
+}
+console.log(Number(rounds));
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        console.log(button.id);
         const humanSelection = getHumanChoice(button.id);
         const computerSelection = getComputerChoice();
         playRound(humanSelection, computerSelection);
@@ -27,8 +31,14 @@ buttons.forEach((button) => {
 //parent elements
 const info = document.querySelector('#info');
 const score = document.querySelector('#score');
+const title = document.querySelector('#header');
 
 //content elements to be changed when needed
+const header2 = document.createElement('h2');
+header2.classList.add('header2');
+header2.textContent = 'First one to reach a score of ' + rounds + ' wins!';
+title.appendChild(header2);
+
 const pChoice = document.createElement('p');
 pChoice.classList.add('pChoice');
 pChoice.textContent = pName + ':';
@@ -149,7 +159,7 @@ function playRound(humanChoice, computerChoice) {
 //play full game of rps
 function checkWinner() {
     
-    if ((humanScore == 5) || (computerScore == 5)) {
+    if ((humanScore == rounds) || (computerScore == rounds)) {
         if (humanScore > computerScore) {
             if (computerScore != 0) {
                 winner.textContent = 'You won the game!';
