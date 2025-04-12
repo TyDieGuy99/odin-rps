@@ -1,27 +1,28 @@
 //variables
 const max = 3; //all 3 rps options
 let pNameInput = prompt('What\'s your name?');
-let pName = pNameInput.substring(0, 12);
 let cNameInput = prompt('What\'s your opponent\'s name?');
-let cName = cNameInput.substring(0, 12);
-let rounds = prompt('How many rounds would you like to play?(Must be at least 3, no more than 25, an odd number)');
+let rounds = prompt('How many rounds would you like to play?\n- Must be a number between 5-25\n- Must be an odd number\n- Will default to 5 rounds if correct input isn\'t met');
 var regex = /^[0-9]+$/;
 let humanScore = 0;
 let computerScore = 0;
 
 //if player doesn't input names or cancel use default
-if ((pName == null) || (pName == '')){
+if ((pNameInput == null) || (pNameInput == '')){
     pName = 'Player';
-}
+    } else {
+        pName = getName(pNameInput);
+    }
 
-if ((cName == null) || (cName == '')){
+    if ((cNameInput == null) || (cNameInput == '')){
     cName = 'CPU';
-}
+    } else {
+        cName = getName(cNameInput);
+    }
+
 if ((rounds < 3) || (rounds > 25) || (!rounds.match(regex)) || (rounds % 2 == 0)) {
     rounds = 5;
 }
-
-console.log(Number(rounds));
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
@@ -74,8 +75,13 @@ score.appendChild(winner);
 
 //functions go down here
 
-function getPlayerName() {
-    
+//trim name and restrict to 12 characters, make first letter uppercase rest lowercase
+function getName(name) {
+    name = name.trim();
+    let newName = name.substring(0, 12);
+    let nameMax = newName.slice(1, 12).toLowerCase();
+    let newCapital = newName.at(0).toUpperCase();
+    return newCapital + nameMax;
 }
 
 //this converts random number 0-2 into rps option for cpu
@@ -189,6 +195,8 @@ function checkWinner() {
                 cChoice.textContent = cName + ':';
                 pChoice.textContent = pName + ':';
                 totalScore.textContent = humanScore + ' : ' + computerScore;
+                rounds = prompt('How many rounds would you like to play?\n- Must be a number between 5-25\n- Must be an odd number\n- Will default to 5 rounds if correct input isn\'t met');
+                header2.textContent = 'First one to reach a score of ' + rounds + ' wins!';
             } else {
                 buttons.forEach((button) => {
                     button.disabled = true;
