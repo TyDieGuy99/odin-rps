@@ -196,7 +196,11 @@ function checkWinner() {
                 pChoice.textContent = pName + ':';
                 totalScore.textContent = humanScore + ' : ' + computerScore;
                 rounds = prompt('How many points would you like to play to?\n- Must be a number between 5-25\n- Must be an odd number\n- Will default to 5 points if correct input isn\'t met');
+                if ((rounds < 5) || (rounds > 25) || (!rounds.match(regex)) || (rounds % 2 == 0)) {
+                    rounds = 5;
+                }
                 header2.textContent = 'First one to reach a score of ' + rounds + ' wins!';
+                
             } else {
                 buttons.forEach((button) => {
                     button.disabled = true;
