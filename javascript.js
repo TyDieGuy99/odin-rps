@@ -2,7 +2,7 @@
 const max = 3; //all 3 rps options
 let pNameInput = prompt('What\'s your name?');
 let cNameInput = prompt('What\'s your opponent\'s name?');
-let rounds = prompt('How many rounds would you like to play?\n- Must be a number between 5-25\n- Must be an odd number\n- Will default to 5 rounds if correct input isn\'t met');
+let rounds = prompt('How many points would you like to play to?\n- Must be a number between 5-25\n- Must be an odd number\n- Will default to 5 points if correct input isn\'t met');
 var regex = /^[0-9]+$/;
 let humanScore = 0;
 let computerScore = 0;
@@ -195,7 +195,7 @@ function checkWinner() {
                 cChoice.textContent = cName + ':';
                 pChoice.textContent = pName + ':';
                 totalScore.textContent = humanScore + ' : ' + computerScore;
-                rounds = prompt('How many rounds would you like to play?\n- Must be a number between 5-25\n- Must be an odd number\n- Will default to 5 rounds if correct input isn\'t met');
+                rounds = prompt('How many points would you like to play to?\n- Must be a number between 5-25\n- Must be an odd number\n- Will default to 5 points if correct input isn\'t met');
                 header2.textContent = 'First one to reach a score of ' + rounds + ' wins!';
             } else {
                 buttons.forEach((button) => {
@@ -203,7 +203,7 @@ function checkWinner() {
                     button.disabled.cursor = 'not-allowed';
                 });
             }
-        }, 2);
+        }, 1);
         
     }
     
