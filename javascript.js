@@ -20,7 +20,7 @@ if ((pNameInput == null) || (pNameInput == '')){
         cName = getName(cNameInput);
     }
 
-if ((rounds < 3) || (rounds > 25) || (!rounds.match(regex)) || (rounds % 2 == 0)) {
+if ((rounds < 5) || (rounds > 25) || (!rounds.match(regex)) || (rounds % 2 == 0)) {
     rounds = 5;
 }
 
