@@ -203,7 +203,7 @@ function checkWinner() {
                     button.disabled.cursor = 'not-allowed';
                 });
             }
-        }, 1);
+        }, 2);
         
     }
     
